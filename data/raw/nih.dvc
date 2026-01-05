@@ -1,0 +1,6 @@
+outs:
+- md5: 4cab154b14abd6bef6e756e6b4408d39.dir
+  size: 45066444194
+  nfiles: 112121
+  hash: md5
+  path: nih

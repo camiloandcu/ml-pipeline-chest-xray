@@ -1,0 +1,14 @@
+{
+  "nih": {
+    "official_name": "NIH ChestX-ray14",
+    "source_url": "https://nihcc.app.box.com/v/ChestXray-NIHCC",
+    "download_date": "2025-12-30",
+    "license": "Public Domain"
+  },
+  "chexpert": {
+    "official_name": "CheXpert v1.0 (small)",
+    "source_url": "https://www.kaggle.com/datasets/ashery/chexpert",
+    "download_date": "2025-12-30",
+    "license": "Public Domain"
+  }
+}
