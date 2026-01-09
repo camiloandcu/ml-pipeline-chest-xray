@@ -8,7 +8,6 @@ import argparse
 
 
 DATA_ROOT = Path("data/raw")
-OUT_DIR = Path("data/manifests")
 
 
 def parse_chexpert_path(raw_path: str) -> Tuple[str, str, str]:
@@ -134,8 +133,8 @@ def load_chexpert_valid() -> List[Dict]:
     return records
 
 
-def main(filename: str):
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+def main(out_path: Path):
+    out_path.parent.mkdir(parents=True, exist_ok=True)
 
     loaders = [
         load_nih,
@@ -151,7 +150,6 @@ def main(filename: str):
 
     df = pd.DataFrame(all_records)
 
-    out_path = OUT_DIR / f"{filename}.csv"
     df.to_csv(out_path, index=False)
 
     print(f"Wrote {len(df)} rows to {out_path}")
@@ -160,11 +158,11 @@ def main(filename: str):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Build master manifest for CXR datasets")
     parser.add_argument(
-        "--filename", 
-        default="master_manifest", 
-        help="Output CSV filename (without extension)"
+        "--output", 
+        default="data/manifests/master_manifest.csv", 
+        help="Output CSV path for the manifest"
     )
 
     args = parser.parse_args()
 
-    main(args.filename)
+    main(args.output)
