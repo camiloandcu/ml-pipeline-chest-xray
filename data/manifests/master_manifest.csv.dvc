@@ -1,0 +1,5 @@
+outs:
+- md5: a3daa7b2c106e0de4cc7fcd38da92937
+  size: 52512602
+  hash: md5
+  path: master_manifest.csv
