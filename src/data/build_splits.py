@@ -83,8 +83,8 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Build patient-level train/val/test splits")
 
-    parser.add_argument("--manifest", default="data/manifests/master_manifest.csv", help="Path to the manifest CSV")
-    parser.add_argument("--output", default="data/splits/splits_v1.csv", help="Output CSV path for the splits")
+    parser.add_argument("--manifest", type=Path, default=Path("data/manifests/master_manifest.csv"), help="Path to the manifest CSV")
+    parser.add_argument("--output", type=Path, default=Path("data/splits/splits_v1.csv"), help="Output CSV path for the splits")
 
     parser.add_argument("--train-ratio", type=float, default=0.7)
     parser.add_argument("--val-ratio", type=float, default=0.2)
@@ -94,21 +94,29 @@ if __name__ == "__main__":
         "--uncertain-policy",
         choices=["negative", "positive", "ignore"],
         default="negative",
+        help="Policy for handling uncertain labels (-1)",
     )
 
     parser.add_argument(
         "--blank-policy",
         choices=["negative", "uncertain"],
         default="negative",
+        help="Policy for handling blank labels (NaN)",
     )
 
     parser.add_argument(
         "--view-policy",
         choices=["frontal_only", "all"],
         default="frontal_only",
+        help="Policy for including view types",
     )
 
-    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument(
+        "--seed", 
+        type=int, 
+        default=42,
+        help="Random seed (for traceability)",    
+    )
 
     args = parser.parse_args()
     main(args)

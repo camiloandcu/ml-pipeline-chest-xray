@@ -159,7 +159,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Build master manifest for CXR datasets")
     parser.add_argument(
         "--output", 
-        default="data/manifests/master_manifest.csv", 
+        type=Path,
+        default=Path("data/manifests/master_manifest.csv"), 
         help="Output CSV path for the manifest"
     )
 
