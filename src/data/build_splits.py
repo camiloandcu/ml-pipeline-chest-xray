@@ -41,6 +41,10 @@ def main(args):
     if args.view_policy == "frontal_only":
         df = df[df["view_type"] == "Frontal"].reset_index(drop=True)
 
+    # Oblique view-position filtering
+    if args.oblique_policy == "exclude":
+        df = df[~df["view_position"].isin(["LL", "RL"])].reset_index(drop=True)
+
     # Apply label policies
     df = apply_label_policies(
         df,
@@ -93,7 +97,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--uncertain-policy",
         choices=["negative", "positive", "ignore"],
-        default="negative",
+        default="positive",
         help="Policy for handling uncertain labels (-1)",
     )
 
@@ -109,6 +113,13 @@ if __name__ == "__main__":
         choices=["frontal_only", "all"],
         default="frontal_only",
         help="Policy for including view types",
+    )
+
+    parser.add_argument(
+    "--oblique-policy",
+        choices=["keep", "exclude"],
+        default="exclude",
+        help="Policy for handling oblique lateral views (LL, RL) based on view_position",
     )
 
     parser.add_argument(
